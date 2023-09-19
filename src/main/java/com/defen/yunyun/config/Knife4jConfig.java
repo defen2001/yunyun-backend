@@ -25,12 +25,12 @@ public class Knife4jConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
                         .title("接口文档")
-                        .description("fenapi-backend")
+                        .description("yunyun-backend")
                         .version("1.0")
                         .build())
                 .select()
                 // 指定 Controller 扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.defen.fenapi.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.defen.yunyun.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
