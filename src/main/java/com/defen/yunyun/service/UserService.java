@@ -74,13 +74,6 @@ public interface UserService extends IService<User> {
      */
     UserVO getUserVO(User user);
 
-    /**
-     * 获取脱敏的用户信息(列表)
-     *
-     * @param userList
-     * @return
-     */
-    List<UserVO> getUserVO(List<User> userList);
 
     /**
      * 获取查询条件
@@ -96,5 +89,7 @@ public interface UserService extends IService<User> {
      * @param tagNameList 用户要拥有的标签
      * @return
      */
-    List<User> searchUsersByTags(List<String> tagNameList);
+    List<UserVO> searchUsersByTags(List<String> tagNameList);
+
+    List<UserVO> matchUsers(long num, User loginUser);
 }

@@ -20,7 +20,7 @@ public class CorsConfig implements WebMvcConfigurer {
                 // 允许发送 Cookie
                 .allowCredentials(true)
 //                 .allowedOriginPatterns("*")
-                .allowedOrigins("http://fenapi.cn","http://localhost:8000/")
+                .allowedOrigins("http://localhost:5173/","http://127.0.0.1:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .maxAge(3600)
