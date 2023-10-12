@@ -15,7 +15,7 @@ public class UserAddRequest implements Serializable {
     /**
      * 用户昵称
      */
-    private String userName;
+    private String username;
 
     /**
      * 账号
@@ -25,7 +25,7 @@ public class UserAddRequest implements Serializable {
     /**
      * 用户头像
      */
-    private String userAvatar;
+    private String avatarUrl;
 
     /**
      * 用户角色: user, admin

@@ -4,7 +4,7 @@ package com.defen.yunyun.model.enums;
  * 队伍状态枚举
  *
  */
-public enum TeamStatusEnum {
+public enum TeamTypeEnum {
 
     PUBLIC(0, "公开"),
     PRIVATE(1, "私有"),
@@ -15,20 +15,20 @@ public enum TeamStatusEnum {
     private String text;
 
 
-    public static TeamStatusEnum getEnumByValue(Integer value) {
+    public static TeamTypeEnum getEnumByValue(Integer value) {
         if (value == null) {
             return null;
         }
-        TeamStatusEnum[] values = TeamStatusEnum.values();
-        for (TeamStatusEnum teamStatusEnum : values) {
-            if (teamStatusEnum.getValue() == value) {
-                return teamStatusEnum;
+        TeamTypeEnum[] values = TeamTypeEnum.values();
+        for (TeamTypeEnum teamTypeEnum : values) {
+            if (teamTypeEnum.getValue() == value) {
+                return teamTypeEnum;
             }
         }
         return null;
     }
 
-    TeamStatusEnum(int value, String text) {
+    TeamTypeEnum(int value, String text) {
         this.value = value;
         this.text = text;
     }

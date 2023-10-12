@@ -46,7 +46,7 @@ public class TeamUserVO implements Serializable {
     /**
      * 0 - 公开，1 - 私有，2 - 加密
      */
-    private Integer status;
+    private Integer type;
 
     /**
      * 创建时间

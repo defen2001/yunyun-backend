@@ -41,7 +41,7 @@ public class TeamQuery extends PageRequest {
     /**
      * 最大人数
      */
-    private Integer maxNum;
+    private Integer memberLimit;
 
     /**
      * 用户id
@@ -51,5 +51,10 @@ public class TeamQuery extends PageRequest {
     /**
      * 0 - 公开，1 - 私有，2 - 加密
      */
-    private Integer status;
+    private Integer type;
+
+    /**
+     * 不需要密码
+     */
+    private Boolean onlyNoPassword;
 }

@@ -1,7 +1,11 @@
 package com.defen.yunyun.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.defen.yunyun.model.dto.Message;
+import com.defen.yunyun.model.dto.user.UserLogin;
+import com.defen.yunyun.model.dto.user.UserPasswordRequest;
 import com.defen.yunyun.model.dto.user.UserQueryRequest;
 import com.defen.yunyun.model.entity.User;
 import com.defen.yunyun.model.vo.LoginUserVO;
@@ -9,6 +13,7 @@ import com.defen.yunyun.model.vo.UserVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 用户服务
@@ -33,7 +38,7 @@ public interface UserService extends IService<User> {
      * @param request
      * @return 脱敏后的用户信息
      */
-    LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
+    UserLogin userLogin(String userAccount, String userPassword, HttpServletRequest request);
 
     /**
      * 获取当前登录用户
@@ -83,13 +88,28 @@ public interface UserService extends IService<User> {
      */
     QueryWrapper<User> getQueryWrapper(UserQueryRequest userQueryRequest);
 
-    /**
-     * 根据标签搜索用户（内存过滤）
-     *
-     * @param tagNameList 用户要拥有的标签
-     * @return
-     */
-    List<UserVO> searchUsersByTags(List<String> tagNameList);
+    void updatePassword(UserPasswordRequest userPasswordRequest, HttpServletRequest request);
 
-    List<UserVO> matchUsers(long num, User loginUser);
+    boolean updateMyUser(User user);
+
+    void updateTags(List<String> tags, User request);
+
+    User queryByUserId(Long userId);
+
+    Page<User> queryByTagsWithPagination(Set<String> tags, Integer currentPage);
+
+    List<User> queryByIdsWithCache(List<Long> userIds);
+
+    List<String> queryHotTags();
+
+    Page<User> recommendUsers(Long userId, Integer currentPage);
+
+    Page<UserVO> queryByUsernameWithPagination(String username, Integer currentPage);
+
+    void sendMessages(String content, Set<Long> userIds, HttpServletRequest request);
+
+    Integer getUnreadMessageCount(HttpServletRequest request);
+
+    List<Message> getMessageWithScrolling(Long scrollId, HttpServletRequest request);
+
 }

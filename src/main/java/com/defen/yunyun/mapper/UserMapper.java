@@ -2,6 +2,7 @@ package com.defen.yunyun.mapper;
 
 import com.defen.yunyun.model.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author defen
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-09-16 16:42:36
 * @Entity com.defen.yunyun.model.entity.User
 */
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
 
 }

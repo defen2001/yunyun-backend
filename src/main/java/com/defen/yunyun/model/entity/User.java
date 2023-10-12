@@ -2,15 +2,22 @@ package com.defen.yunyun.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Data;
 
 /**
  * 用户
  * @TableName user
  */
-@TableName(value ="user")
+//@TableName(value ="user")
+@TableName(autoResultMap = true)
 @Data
 public class User implements Serializable {
     /**
@@ -42,10 +49,11 @@ public class User implements Serializable {
     /**
      * 标签 json 列表
      */
-    private String tags;
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private List<String> tags;
 
     /**
-     * 性别
+     * 性别(0 - 未知, 1 - 男, 2 - 女)
      */
     private Integer gender;
 
@@ -60,14 +68,14 @@ public class User implements Serializable {
     private String email;
 
     /**
-     * 用户角色：user / admin
+     * 个人简介
      */
-    private String userRole;
+    private String profile;
 
     /**
-     * 状态 0 - 正常
+     * 用户角色：user/admin/ban
      */
-    private Integer userStatus;
+    private String userRole;
 
     /**
      * 创建时间

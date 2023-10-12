@@ -1,14 +1,13 @@
 package com.defen.yunyun.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.defen.yunyun.model.dto.team.TeamJoinRequest;
-import com.defen.yunyun.model.dto.team.TeamQuery;
-import com.defen.yunyun.model.dto.team.TeamQuitRequest;
-import com.defen.yunyun.model.dto.team.TeamUpdateRequest;
+import com.defen.yunyun.model.dto.team.*;
 import com.defen.yunyun.model.entity.Team;
 import com.defen.yunyun.model.entity.User;
-import com.defen.yunyun.model.vo.TeamUserVO;
+import com.defen.yunyun.model.vo.TeamInfoVO;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -17,32 +16,30 @@ import java.util.List;
  * @author defen
  */
 public interface TeamService extends IService<Team> {
+
+    /**
+     * 校验
+     *
+     * @param team
+     */
+    void validTeamInfo(Team team);
     /**
      * 创建队伍
      *
      * @param team
-     * @param loginUser
+     * @param request
      * @return
      */
-    long addTeam(Team team, User loginUser);
-
-    /**
-     * 搜索队伍
-     *
-     * @param teamQuery
-     * @param isAdmin
-     * @return
-     */
-    List<TeamUserVO> listTeams(TeamQuery teamQuery, boolean isAdmin);
+    long addTeam(Team team, HttpServletRequest request);
 
     /**
      * 更新队伍
      *
-     * @param teamUpdateRequest
-     * @param loginUser
+     * @param team
+     * @param request
      * @return
      */
-    boolean updateTeam(TeamUpdateRequest teamUpdateRequest, User loginUser);
+    void updateTeam(TeamUpdateRequest team, HttpServletRequest request);
 
     /**
      * 加入队伍
@@ -50,7 +47,7 @@ public interface TeamService extends IService<Team> {
      * @param teamJoinRequest
      * @return
      */
-    boolean joinTeam(TeamJoinRequest teamJoinRequest, User loginUser);
+    boolean joinTeam(TeamJoinRequest teamJoinRequest, HttpServletRequest request);
 
     /**
      * 退出队伍
@@ -59,7 +56,7 @@ public interface TeamService extends IService<Team> {
      * @param loginUser
      * @return
      */
-    boolean quitTeam(TeamQuitRequest teamQuitRequest, User loginUser);
+    String quitTeam(TeamQuitRequest teamQuitRequest, HttpServletRequest loginUser);
 
     /**
      * 删除（解散）队伍
@@ -70,4 +67,19 @@ public interface TeamService extends IService<Team> {
      */
     boolean deleteTeam(long id, User loginUser);
 
+    TeamInvitation sendTeamInvitation(TeamInvitation teamInvitation, HttpServletRequest request);
+
+    void acceptTeamInvitation(String invitationCode, HttpServletRequest request);
+
+    TeamInfoVO queryByTeamId(Long teamId, HttpServletRequest request);
+
+    List<TeamInfoVO> listMyTeamInfoVO(HttpServletRequest request);
+
+    List<TeamInfoVO> listTeamInfoByUserId(Long userId);
+
+    Page<TeamInfoVO> queryByConditionWithPagination(TeamQuery teamQuery);
+
+    List<User> listTeamMember(Long teamId);
+
+    Page<TeamInfoVO> recommendTeams(Long userId, Integer currentPage);
 }

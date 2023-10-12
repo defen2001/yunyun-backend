@@ -1,10 +1,13 @@
 package com.defen.yunyun.model.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户视图
@@ -21,7 +24,7 @@ public class UserVO implements Serializable {
     /**
      * 用户昵称
      */
-    private String userName;
+    private String username;
 
     /**
      * 用户账号
@@ -31,27 +34,38 @@ public class UserVO implements Serializable {
     /**
      * 用户头像
      */
-    private String userAvatar;
+    private String avatarUrl;
 
     /**
-     * 用户简介
+     * 标签 json 列表
      */
-    private String userProfile;
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private List<String> tags;
+
+    /**
+     * 性别
+     */
+    private Integer gender;
+
+    /**
+     * 电话
+     */
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 个人简介
+     */
+    private String profile;
 
     /**
      * 用户角色：user/admin/ban
      */
     private String userRole;
-
-    /**
-     * accessKey
-     */
-    private String accessKey;
-
-    /**
-     * secretKey
-     */
-    private String secretKey;
 
     /**
      * 创建时间

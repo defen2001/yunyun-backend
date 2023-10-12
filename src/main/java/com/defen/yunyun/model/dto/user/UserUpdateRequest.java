@@ -19,17 +19,32 @@ public class UserUpdateRequest implements Serializable {
     /**
      * 用户昵称
      */
-    private String userName;
+    private String username;
 
     /**
      * 用户头像
      */
-    private String userAvatar;
+    private String avatarUrl;
 
     /**
-     * 简介
+     * 性别(0 - 未知, 1 - 男, 2 - 女)
      */
-    private String userProfile;
+    private Integer gender;
+
+    /**
+     * 电话
+     */
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 个人简介
+     */
+    private String profile;
 
     /**
      * 用户角色：user/admin/ban
