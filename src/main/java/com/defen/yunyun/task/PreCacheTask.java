@@ -51,7 +51,7 @@ public class PreCacheTask {
     /**
      * 标签的定时缓存任务
      */
-    @Scheduled(cron = "0 19 20 * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void doCacheTagsTask() {
         // 获取分布式锁实例
         RLock lock = redissonClient.getLock(RedisConstant.LOCK_CACHE_TAGS_KEY);

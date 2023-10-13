@@ -54,14 +54,14 @@ public class TeamController {
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<Long> addTeam(@RequestBody TeamAddRequest teamAddRequest, HttpServletRequest request) {
+    public BaseResponse<String> addTeam(@RequestBody TeamAddRequest teamAddRequest, HttpServletRequest request) {
         if (teamAddRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         Team team = new Team();
         BeanUtils.copyProperties(teamAddRequest, team);
         long teamId = teamService.addTeam(team, request);
-        return ResultUtils.success(teamId);
+        return ResultUtils.success("队伍创建成功");
     }
 
     /**
@@ -71,12 +71,12 @@ public class TeamController {
      * @return
      */
     @PostMapping("/join")
-    public BaseResponse<Boolean> joinTeam(@RequestBody TeamJoinRequest teamJoinRequest, HttpServletRequest request) {
+    public BaseResponse<String> joinTeam(@RequestBody TeamJoinRequest teamJoinRequest, HttpServletRequest request) {
         if (teamJoinRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         boolean result = teamService.joinTeam(teamJoinRequest, request);
-        return ResultUtils.success(result);
+        return ResultUtils.success("队伍加入成功");
     }
 
     /**

@@ -214,16 +214,15 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "禁止加入私有队伍");
         }
         String password = teamJoinRequest.getPassword();
-        if (TeamTypeEnum.SECRET.equals(teamTypeEnum)) {
-            if (StringUtils.isBlank(password) || !password.equals(team.getPassword())) {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
-            }
+        String teamPassword = team.getPassword();
+        if (Strings.isNotBlank(teamPassword) && !teamPassword.equals(password)){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
         }
         User loginUser = userService.getLoginUser(request);
         // 该用户已加入的队伍数量
         long userId = loginUser.getId();
         // 只有一个线程能获取到锁
-        RLock lock = redissonClient.getLock("yupao:join_team");
+        RLock lock = redissonClient.getLock("yunyun:join_team");
         try {
             // 抢到锁并执行
             while (true) {
@@ -641,8 +640,8 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team>
      */
     private RList<TeamInfoVO> generateTeamRecommendCache(Long userId) {
         // 在随机位置查询队伍信息并打乱
-        int offset = 0;
-//        int offset = RandomUtil.randomInt(0, 100);
+//        int offset = 0; // 测试可用
+        int offset = RandomUtil.randomInt(0, 100);
         List<TeamInfoVO> teamInfoList = teamMapper.listTeamInfoByCondition(
                 offset, 100, null, true);
         Collections.shuffle(teamInfoList);
